@@ -56,6 +56,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
+    /**
+   * Chnage button text color
+   */
+	fontColor?: any,
   /**
    * Function to execute on press.
    */
@@ -150,6 +154,7 @@ class Button extends React.Component<Props, State> {
       accessibilityLabel,
       onPress,
       style,
+      fontColor,
       theme,
       contentStyle,
       ...rest
@@ -202,7 +207,13 @@ class Button extends React.Component<Props, State> {
             : !color(backgroundColor).light();
       }
 
-      textColor = isDark ? white : black;
+      if (fontColor != null || fontColor != undefined) {
+				textColor = fontColor;
+			} else {
+				textColor = isDark ? white : black;
+			}
+      
+      //textColor = isDark ? white : black;
     } else if (buttonColor) {
       textColor = buttonColor;
     } else {
